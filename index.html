@@ -88,19 +88,11 @@
     <div class="description">
       not so sketchy
     </div>
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/thatismatt/josi/zipball/master">zip</a> or
-      <a href="http://github.com/thatismatt/josi/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-    </p>
-    <pre>$ git clone git://github.com/thatismatt/josi</pre>
     
-    <p>How to create a josi app and start the dev server:</p>
+    <p>Josi is a web framework for <a href="http://nodejs.org/">node.js</a>.</p>
+    
+    <h2>Getting started</h2>
+    <p>Create a josi app and start the dev server:</p>
     <pre>$ josi temp
 $ cd temp
 $ josi run</pre>
@@ -110,13 +102,26 @@ $ josi run</pre>
 var redirect = results.redirect;
 var view = results.view;
 
-this.index = function() { return view({ title: 'A Title', name: 'Kate' }); };
-this.redir = function() { return redirect('/product/details/1'); }</pre>
+this.index = function() {
+  return view({ title: 'A Title', name: 'Kate' });
+};
+this.redir = function() {
+  return redirect('/product/details/1');
+}</pre>
+
+    <h2>Download</h2>
+    <p>
+      You can download this project in either
+      <a href="http://github.com/thatismatt/josi/zipball/master">zip</a> or
+      <a href="http://github.com/thatismatt/josi/tarball/master">tar</a> formats.
+    </p>
+    <p>You can also clone the project with <a href="http://git-scm.com">Git</a> by running:</p>
+    <pre>$ git clone git://github.com/thatismatt/josi</pre>
     
     <div class="footer">
       Get the source code on GitHub : <a href="http://github.com/thatismatt/josi">thatismatt/josi</a>
     </div>
-
+  
   </div>
 
   <script type="text/javascript">
