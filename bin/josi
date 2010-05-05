@@ -1,0 +1,84 @@
+#! /usr/bin/env node
+
+var name = 'Josi';
+var version = '0.1';
+var author = 'Matt Lee - @thatismatt';
+
+var fs = require('fs');
+var sys = require('sys');
+var path = require('path');
+
+try {
+  var utilities = require('josi/utilities');
+}
+catch(err) {
+  // if that isn't on the path then assume the script being run is
+  // in the source, so add the directory of the script to the path.
+  if(err.message == "Cannot find module 'josi/utilities'") {
+    require.paths.push(path.normalize(path.dirname(__filename) + '/..'));
+    var utilities = require('josi/utilities');
+  }
+}
+
+var Server = require('josi/server').Server;
+
+var cwdContainsApp = function() {
+  return utilities.fileOrDirectoryExists(path.join(process.cwd(), 'app.js'));
+};
+
+if (!cwdContainsApp()) {
+  sys.puts('ERROR: Directory does not contain a Josi app.')
+  return;
+}
+
+var processedArgs = utilities.processARGV(process.argv);
+
+var task = processedArgs.task;
+var opts = processedArgs.opts;
+
+tasks = [
+  {
+    name: 'help',
+    execute: function() {
+      sys.puts('Help');
+      sys.puts(' todo: write help message.')
+    }  
+  },
+  {
+    name: 'run',
+    execute: function() {
+      var port = parseInt(opts.port) || 8080;
+      var server = new Server(process.cwd(), port);
+      server.listen();
+      sys.puts('Josi server started on http://localhost:' + port + '/.');
+      sys.puts('ctrl-c to stop.');
+    }
+  },
+  {
+    name: 'test',
+    execute: function() {
+      sys.puts('Test');
+      sys.puts(' todo: write tests and run them.')
+    }  
+  },
+  {
+    name: 'version',
+    execute: function() {
+      sys.puts(version);
+    }
+  }
+];
+
+var matchingTasks = tasks
+  .filter(function(t) { return new RegExp('^' + task).test(t.name); });
+
+if (matchingTasks.length == 1) {
+  matchingTasks[0].execute();
+} else if (matchingTasks.length > 1) {
+  sys.puts('"' + task + '" is not a Josi command, did you mean one of these?');
+  matchingTasks.forEach(function(t) {
+    sys.puts('\t' + t.name);
+  });
+} else {
+  tasks[0].execute();
+}
