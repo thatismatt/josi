@@ -26,17 +26,63 @@ var cwdContainsApp = function() {
   return utilities.fileOrDirectoryExists(path.join(process.cwd(), 'app.js'));
 };
 
-if (!cwdContainsApp()) {
-  sys.puts('ERROR: Directory does not contain a Josi app.')
-  return;
-}
-
-var processedArgs = utilities.processARGV(process.argv);
-
-var task = processedArgs.task;
-var opts = processedArgs.opts;
-
 tasks = [
+  {
+    name: 'new',
+    execute: function(appName) {
+      appName = appName || opts.name;
+      if (utilities.fileOrDirectoryExists(appName)) {
+        sys.puts('Can\'t create a new Josi app with the name "' + appName + '",' +
+          ' as a file or directory with that name already exists.');
+        return;
+      }
+      sys.puts('Creating Josi app...');
+      fs.mkdirSync(appName, 511);
+      fs.mkdirSync(appName + '/controllers', 511);
+      fs.mkdirSync(appName + '/views', 511);
+      fs.mkdirSync(appName + '/views/home', 511);
+      fs.writeFileSync(appName + '/app.js',
+        [
+          'this.init = function() {',
+          '  this.router.add(',
+          '    // this route matches: /<controller>/<action>/<id>',
+          '    /^\\/(?:(\\w+)\\/?)?(?:(\\w+)\\/?)?(?:([0-9]+)\\/?)?$/,',
+          '    { controller: \'home\', action: \'index\' }',
+          '  );',
+          '};', ''
+        ].join('\r\n')
+      );
+      fs.writeFileSync(appName + '/controllers/home.js',
+        [
+          'var view = require(\'josi/results\').view;',
+          '',
+          'this.index = function() {',
+          '  return view({',
+          '    title: \'' + appName + ' - A Josi App\',',
+          '    name: \'' + appName + '\'',
+          '  });',
+          '};', ''
+        ].join('\r\n')
+      );
+      fs.writeFileSync(appName + '/views/master.html',
+        [
+          '<html>',
+          '  <head><title><%= title %></title></head>',
+          '  <body>',
+          '    <h1><%= title %></h1>',
+          '    <%= main %>',
+          '  </body>',
+          '</html>', ''
+        ].join('\r\n')
+      );
+      fs.writeFileSync(appName + '/views/home/index.html',
+        [
+          '<p>App name: <b><%= name %></b></p>', ''
+        ].join('\r\n')
+      );
+      sys.puts('Josi app created. Type "cd ' + appName + '; josi run" to start the web server.');
+    },
+  },
   {
     name: 'help',
     execute: function() {
@@ -69,16 +115,40 @@ tasks = [
   }
 ];
 
-var matchingTasks = tasks
-  .filter(function(t) { return new RegExp('^' + task).test(t.name); });
+var getAllMatchingTasks = function(name) {
+  var r = new RegExp('^' + name);
+  return tasks
+    .filter(function(t) {
+      return r.test(t.name);
+    });
+};
 
-if (matchingTasks.length == 1) {
-  matchingTasks[0].execute();
-} else if (matchingTasks.length > 1) {
-  sys.puts('"' + task + '" is not a Josi command, did you mean one of these?');
-  matchingTasks.forEach(function(t) {
-    sys.puts('\t' + t.name);
-  });
+var getFirstMatchingTask = function(t) {
+  return getAllMatchingTasks(t)[0];
+};
+
+var processedArgs = utilities.processARGV(process.argv);
+
+var task = processedArgs.task;
+var opts = processedArgs.opts;
+
+if (cwdContainsApp()) {
+  var matchingTasks = getAllMatchingTasks(task);
+
+  if (matchingTasks.length == 1) {
+    matchingTasks[0].execute();
+  } else if (matchingTasks.length > 1) {
+    sys.puts('"' + task + '" is not a Josi command, did you mean one of these?');
+    matchingTasks.forEach(function(t) {
+      sys.puts('\t' + t.name);
+    });
+  } else {
+    getFirstMatchingTask('help').execute();
+  }
 } else {
-  tasks[0].execute();
+  if (task) {
+    getFirstMatchingTask('new').execute(task);
+  } else {
+    sys.puts('ERROR: Directory does not contain a Josi app.')
+  }
 }
