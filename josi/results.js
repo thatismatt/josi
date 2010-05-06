@@ -7,7 +7,7 @@ this.Result = Result = Class.extend();
 this.ActionResult = ActionResult = Result.extend({
   init: function(body, headers, statusCode) {
     this.statusCode = statusCode || 200;
-    this.headers = headers || { 'Content-type': 'text/html' };
+    this.headers = headers || { 'Content-Type': 'text/html' };
     this.body = body;
   },
   execute: function(req, res) {
@@ -49,11 +49,11 @@ this.view = function(data) {
 };
 
 this.redirect = function(url) {
-  return new ActionResult('Redirecting...', { 'Content-type': 'text/html',  'Location': url }, 301);
+  return new ActionResult('Redirecting...', { 'Content-Type': 'text/html',  'Location': url }, 301);
 };
 
 this.notFound = function(msg) {
-  return new ActionResult(msg || 'Not found.', { 'Content-type': 'text/html' }, 404);
+  return new ActionResult(msg || 'Not found.', { 'Content-Type': 'text/html' }, 404);
 };
 
 this.error = function(err) {
@@ -62,15 +62,15 @@ this.error = function(err) {
   } else {
     var msg = err;
   }
-  return new ActionResult(msg, { 'Content-type': 'text/plain' }, 500);
+  return new ActionResult(msg, { 'Content-Type': 'text/plain' }, 500);
 };
 
 this.raw = function(data) {
-  return new ActionResult(data, { 'Content-type': 'text/plain' });
+  return new ActionResult(data, { 'Content-Type': 'text/plain' });
 };
 
 this.json = function(data) {
-  return new ActionResult(JSON.stringify(data), { 'Content-type': 'application/json' });
+  return new ActionResult(data, { 'Content-Type': 'application/json' });
 };
 
 this.content = function(filename) {
