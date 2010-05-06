@@ -66,11 +66,11 @@ this.error = function(err) {
 };
 
 this.raw = function(data) {
-  return new ActionResult(data, { 'Content-Type': 'text/plain' }, 200);
+  return new ActionResult(data, { 'Content-type': 'text/plain' });
 };
 
 this.json = function(data) {
-  return new ActionResult(JSON.stringify(data), { 'Content-Type': 'application/json' }, 200);
+  return new ActionResult(JSON.stringify(data), { 'Content-type': 'application/json' });
 };
 
 this.content = function(filename) {
