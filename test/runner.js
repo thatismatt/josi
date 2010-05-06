@@ -13,6 +13,15 @@ catch(err) {
   }
 }
 
+
+var red   = function(str) { return "\033[31m" + str + "\033[39m"; };
+var green = function(str) { return "\033[32m" + str + "\033[39m"; };
+var bold  = function(str) { return "\033[1m"  + str + "\033[22m"; };
+
+var putsResults = function(passes, fails) {
+  sys.puts('passes: ' + green(passes) + ' fails: ' + red(fails));
+}
+
 var testsuites = [ 'routing', 'results' ];
 
 var totalpasses = 0;
@@ -36,14 +45,14 @@ testsuites.forEach(function(suitename) {
     sys.print('.');
   }
   sys.puts('');
-  sys.puts('passes: ' + passes + ' fails: ' + fails);
+  putsResults(passes, fails);
   
   totalpasses += passes;
   totalfails += fails;
 });
 
 sys.puts('Totals');
-sys.puts('passes: ' + totalpasses + ' fails: ' + totalfails);
+putsResults(totalpasses, totalfails);
 
 if (totalfails) {
   failDetails.forEach(function(fd) {
