@@ -9,111 +9,22 @@ var sys = require('sys');
 var path = require('path');
 
 try {
-  var utilities = require('josi/utilities');
+  var tasks = require('josi/tasks').tasks;
 }
 catch(err) {
   // if that isn't on the path then assume the script being run is
   // in the source, so add the directory of the script to the path.
-  if(err.message == "Cannot find module 'josi/utilities'") {
+  if(err.message == "Cannot find module 'josi/tasks'") {
     require.paths.push(path.normalize(path.dirname(__filename) + '/..'));
-    var utilities = require('josi/utilities');
+    var tasks = require('josi/tasks').tasks;
   }
 }
 
-var Server = require('josi/server').Server;
+var utilities = require('josi/utilities');
 
 var cwdContainsApp = function() {
   return utilities.fileOrDirectoryExists(path.join(process.cwd(), 'app.js'));
 };
-
-tasks = [
-  {
-    name: 'new',
-    execute: function(appName) {
-      appName = appName || opts.name;
-      if (utilities.fileOrDirectoryExists(appName)) {
-        sys.puts('Can\'t create a new Josi app with the name "' + appName + '",' +
-          ' as a file or directory with that name already exists.');
-        return;
-      }
-      sys.puts('Creating Josi app...');
-      fs.mkdirSync(appName, 511);
-      fs.mkdirSync(appName + '/controllers', 511);
-      fs.mkdirSync(appName + '/views', 511);
-      fs.mkdirSync(appName + '/views/home', 511);
-      fs.writeFileSync(appName + '/app.js',
-        [
-          'this.init = function() {',
-          '  this.router.add(',
-          '    // this route matches: /<controller>/<action>/<id>',
-          '    /^\\/(?:(\\w+)\\/?)?(?:(\\w+)\\/?)?(?:([0-9]+)\\/?)?$/,',
-          '    { controller: \'home\', action: \'index\' }',
-          '  );',
-          '};', ''
-        ].join('\r\n')
-      );
-      fs.writeFileSync(appName + '/controllers/home.js',
-        [
-          'var view = require(\'josi/results\').view;',
-          '',
-          'this.index = function() {',
-          '  return view({',
-          '    title: \'' + appName + ' - A Josi App\',',
-          '    name: \'' + appName + '\'',
-          '  });',
-          '};', ''
-        ].join('\r\n')
-      );
-      fs.writeFileSync(appName + '/views/master.html',
-        [
-          '<html>',
-          '  <head><title><%= title %></title></head>',
-          '  <body>',
-          '    <h1><%= title %></h1>',
-          '    <%= main %>',
-          '  </body>',
-          '</html>', ''
-        ].join('\r\n')
-      );
-      fs.writeFileSync(appName + '/views/home/index.html',
-        [
-          '<p>App name: <b><%= name %></b></p>', ''
-        ].join('\r\n')
-      );
-      sys.puts('Josi app created. Type "cd ' + appName + '; josi run" to start the web server.');
-    },
-  },
-  {
-    name: 'help',
-    execute: function() {
-      sys.puts('Help');
-      sys.puts(' todo: write help message.')
-    }  
-  },
-  {
-    name: 'run',
-    execute: function() {
-      var port = parseInt(opts.port) || 8080;
-      var server = new Server(process.cwd(), port);
-      server.listen();
-      sys.puts('Josi server started on http://localhost:' + port + '/.');
-      sys.puts('ctrl-c to stop.');
-    }
-  },
-  {
-    name: 'test',
-    execute: function() {
-      sys.puts('Test');
-      sys.puts(' todo: write tests and run them.')
-    }  
-  },
-  {
-    name: 'version',
-    execute: function() {
-      sys.puts(version);
-    }
-  }
-];
 
 var getAllMatchingTasks = function(name) {
   var r = new RegExp('^' + name);
@@ -130,24 +41,25 @@ var getFirstMatchingTask = function(t) {
 var processedArgs = utilities.processARGV(process.argv);
 
 var task = processedArgs.task;
-var opts = processedArgs.opts;
+var opts = processedArgs.opts || {};
 
 if (cwdContainsApp()) {
   var matchingTasks = getAllMatchingTasks(task);
 
   if (matchingTasks.length == 1) {
-    matchingTasks[0].execute();
+    matchingTasks[0].execute(opts);
   } else if (matchingTasks.length > 1) {
     sys.puts('"' + task + '" is not a Josi command, did you mean one of these?');
     matchingTasks.forEach(function(t) {
       sys.puts('\t' + t.name);
     });
   } else {
-    getFirstMatchingTask('help').execute();
+    getFirstMatchingTask('help').execute(opts);
   }
 } else {
   if (task) {
-    getFirstMatchingTask('new').execute(task);
+    opts.name = task;
+    getFirstMatchingTask('new').execute(opts);
   } else {
     sys.puts('ERROR: Directory does not contain a Josi app.')
   }
