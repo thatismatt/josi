@@ -1,9 +1,5 @@
 #! /usr/bin/env node
 
-var name = 'Josi';
-var version = '0.1';
-var author = 'Matt Lee - @thatismatt';
-
 var fs = require('fs');
 var sys = require('sys');
 var path = require('path');
