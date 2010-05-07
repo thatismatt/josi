@@ -41,6 +41,15 @@
       padding: 0.4em;
       font-family: "Consolas", "Monaco", "Courier New", monospaced;
     }
+    pre .kwd1 {
+      color: #66a;
+    }
+    pre .kwd2 {
+      color: #6aa;
+    }
+    pre .str {
+      color: #966;
+    }
     hr {
       border: 0;    
       width: 80%;
@@ -97,15 +106,15 @@ $ cd temp
 $ josi run</pre>
     
     <p>A josi controller:</p>
-    <pre>var results = require('josi/results');
-var redirect = results.redirect;
-var view = results.view;
+    <pre><span class="kwd2">var</span> results = require(<span class="str">'josi/results'</span>);
+<span class="kwd2">var</span> redirect = results.redirect;
+<span class="kwd2">var</span> view = results.view;
 
-this.index = function() {
-  return view({ title: 'A Title', name: 'Kate' });
+<span class="kwd2">this</span>.index = <span class="kwd1">function</span>() {
+  <span class="kwd1">return</span> view({ title: <span class="str">'A Title'</span>, name: <span class="str">'Kate'</span> });
 };
-this.redir = function() {
-  return redirect('/product/details/1');
+<span class="kwd2">this</span>.redir = <span class="kwd1">function</span>() {
+  <span class="kwd1">return</span> redirect(<span class="str">'/product/details/1'</span>);
 }</pre>
 
     <h2>Download</h2>
