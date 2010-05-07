@@ -1,7 +1,7 @@
-//var sys = require('sys');
-
 var assert = require('assert');
 var results = require('josi/results');
+
+this.name = 'results';
 
 this.tests = {
   'Content Type of view is HTML': function() {

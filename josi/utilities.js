@@ -14,13 +14,17 @@ this.argumentsToArray = function(args) {
   return arr;
 }
 
-this.fileOrDirectoryExists = function(fileOrDirectory) {
+this.fileOrDirectoryExists = fileOrDirectoryExists = function(fileOrDirectory) {
   return fs.readdirSync(path.dirname(fileOrDirectory))
     .contains(path.basename(fileOrDirectory));
 };
 
+this.cwdContainsApp = function() {
+  return fileOrDirectoryExists(path.join(process.cwd(), 'app.js'));
+};
+
 this.processARGV = function(argv) {
-  var task = (argv[2] && /^\w+$/.test(argv[2])) ? argv[2] : 'help';
+  var task = (argv[2] && /^\w+$/.test(argv[2])) ? argv[2] : '';
   var optsRE = /-{0,2}(\w+)=(\w+)/
   var opts = {};
   argv

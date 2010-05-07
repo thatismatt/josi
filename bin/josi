@@ -18,10 +18,6 @@ catch(err) {
 
 var utilities = require('josi/utilities');
 
-var cwdContainsApp = function() {
-  return utilities.fileOrDirectoryExists(path.join(process.cwd(), 'app.js'));
-};
-
 var getAllMatchingTasks = function(name) {
   var r = new RegExp('^' + name);
   return tasks
@@ -39,24 +35,24 @@ var processedArgs = utilities.processARGV(process.argv);
 var task = processedArgs.task;
 var opts = processedArgs.opts || {};
 
-if (cwdContainsApp()) {
-  var matchingTasks = getAllMatchingTasks(task);
-
-  if (matchingTasks.length == 1) {
-    matchingTasks[0].execute(opts);
-  } else if (matchingTasks.length > 1) {
-    sys.puts('"' + task + '" is not a Josi command, did you mean one of these?');
-    matchingTasks.forEach(function(t) {
-      sys.puts('\t' + t.name);
-    });
+var matchingTasks = task ? getAllMatchingTasks(task) : [];
+if (matchingTasks.length == 1) {
+  var matchedTask = matchingTasks[0];
+  if (!utilities.cwdContainsApp() && matchedTask.appOnly) {
+    sys.puts('ERROR: can only execute the task "' + matchedTask.name + '" in a directory containing a Josi app.');
   } else {
-    getFirstMatchingTask('help').execute(opts);
+    matchedTask.execute(opts);
   }
+} else if (matchingTasks.length > 1) {
+  sys.puts('"' + task + '" is not a Josi command, did you mean one of these?');
+  matchingTasks.forEach(function(t) {
+    sys.puts('\t' + t.name);
+  });
 } else {
   if (task) {
     opts.name = task;
     getFirstMatchingTask('new').execute(opts);
   } else {
-    sys.puts('ERROR: Directory does not contain a Josi app.')
+    getFirstMatchingTask('help').execute(opts);    
   }
 }
