@@ -5,6 +5,7 @@ var utilities = require('josi/utilities');
 
 this.task = {
   name: 'new',
+  doc: "create a new josi app",
   execute: function(opts) {
     var appName = opts.name;
     if (utilities.fileOrDirectoryExists(appName)) {

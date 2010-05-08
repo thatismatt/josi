@@ -3,6 +3,8 @@ var Server = require('josi/server').Server;
 
 this.task = {
   name: 'run',
+  doc: "start the josi web server",
+  opts: "port - port number for the server to listen on",
   appOnly: true,
   execute: function(opts) {
     var port = parseInt(opts.port) || 8080;

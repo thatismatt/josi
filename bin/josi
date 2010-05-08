@@ -5,43 +5,30 @@ var sys = require('sys');
 var path = require('path');
 
 try {
-  var tasks = require('josi/tasks').tasks;
-}
-catch(err) {
+  var tasks = require('josi/tasks');
+} catch(err) {
   // if that isn't on the path then assume the script being run is
   // in the source, so add the directory of the script to the path.
   if(err.message == "Cannot find module 'josi/tasks'") {
     require.paths.push(path.normalize(path.dirname(__filename) + '/..'));
-    var tasks = require('josi/tasks').tasks;
+    var tasks = require('josi/tasks');
   }
 }
 
 var utilities = require('josi/utilities');
-
-var getAllMatchingTasks = function(name) {
-  var r = new RegExp('^' + name);
-  return tasks
-    .filter(function(t) {
-      return r.test(t.name);
-    });
-};
-
-var getFirstMatchingTask = function(t) {
-  return getAllMatchingTasks(t)[0];
-};
 
 var processedArgs = utilities.processARGV(process.argv);
 
 var task = processedArgs.task;
 var opts = processedArgs.opts || {};
 
-var matchingTasks = task ? getAllMatchingTasks(task) : [];
+var matchingTasks = task ? tasks.getAllMatching(task) : [];
 if (matchingTasks.length == 1) {
   var matchedTask = matchingTasks[0];
   if (!utilities.cwdContainsApp() && matchedTask.appOnly) {
     sys.puts('ERROR: can only execute the task "' + matchedTask.name + '" in a directory containing a Josi app.');
   } else {
-    matchedTask.execute(opts);
+    matchedTask.execute(opts, tasks.tasks);
   }
 } else if (matchingTasks.length > 1) {
   sys.puts('"' + task + '" is not a Josi command, did you mean one of these?');
@@ -51,8 +38,8 @@ if (matchingTasks.length == 1) {
 } else {
   if (task) {
     opts.name = task;
-    getFirstMatchingTask('new').execute(opts);
+    tasks.getFirstMatching('new').execute(opts, tasks.tasks);
   } else {
-    getFirstMatchingTask('help').execute(opts);    
+    tasks.getFirstMatching('help').execute(opts, tasks.tasks);    
   }
 }
