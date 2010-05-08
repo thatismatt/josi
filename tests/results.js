@@ -1,7 +1,7 @@
 var assert = require('assert');
 var results = require('josi/results');
 
-this.name = 'results';
+this.name = 'Results Tests';
 
 this.tests = {
   'Content Type of view is HTML': function() {
@@ -12,4 +12,4 @@ this.tests = {
     var result = results.json({});
     assert.equal(result.headers['Content-Type'], 'application/json');
   },
-}
+};

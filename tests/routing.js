@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-this.name = 'routing';
+this.name = 'Routing Tests';
 
 this.tests = {
-}
+};

@@ -1,17 +1,23 @@
 var sys = require('sys');
+var fs = require('fs');
+var path = require('path');
+
 var utilities = require('josi/utilities');
 var Runner = require('josi/test').Runner;
 
 this.task = {
   name: 'test',
-  doc: 'run the tests (app\'s or framework\'s)',
+  doc: 'run the app\'s tests',
   execute: function() {
-    if (utilities.cwdContainsApp()) {
-      sys.puts('Test');
-      sys.puts(' todo: run this josi app\'s tests.');
-    } else {
-      var runner = new Runner([ '../tests/routing', '../tests/results' ]);
-      runner.run();      
+    if (!utilities.fileOrDirectoryExists('tests')) {
+      sys.puts('This josi app contains no tests.')
+      return;
     }
+    var cwd = process.cwd();
+    var tests = fs.readdirSync('tests')
+      .map(function(t) { return path.join(cwd, 'tests', utilities.stripExtension(t)); });
+    sys.puts(sys.inspect(tests));
+    var runner = new Runner(tests);
+    runner.run();
   }
 };

@@ -43,6 +43,11 @@ this.processARGV = function(argv) {
   };
 };
 
+this.stripExtension = function(filename) {
+  var index = filename.lastIndexOf('.');
+  return index < 0 ? filename : filename.substring(0, index);
+};
+
 // from djangode
 this.serveFile = function(req, res, filename) {
     // TODO: Ensure security against directory traversal attacks
