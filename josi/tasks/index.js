@@ -1,12 +1,12 @@
 var help = require('josi/tasks/help');
-var newapp = require('josi/tasks/new');
+var create = require('josi/tasks/create');
 var run = require('josi/tasks/run');
 var test = require('josi/tasks/test');
 var version = require('josi/tasks/version');
 
 var tasks = [
   help.task,
-  newapp.task,
+  create.task,
   run.task,
   test.task,
   version.task

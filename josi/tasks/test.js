@@ -4,7 +4,7 @@ var Runner = require('josi/test').Runner;
 
 this.task = {
   name: 'test',
-  doc: "run the tests (app's or framework's)",
+  doc: 'run the tests (app\'s or framework\'s)',
   execute: function() {
     if (utilities.cwdContainsApp()) {
       sys.puts('Test');

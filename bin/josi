@@ -38,7 +38,7 @@ if (matchingTasks.length == 1) {
 } else {
   if (task) {
     opts.name = task;
-    tasks.getFirstMatching('new').execute(opts, tasks.tasks);
+    tasks.getFirstMatching('create').execute(opts, tasks.tasks);
   } else {
     tasks.getFirstMatching('help').execute(opts, tasks.tasks);    
   }

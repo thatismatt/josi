@@ -3,7 +3,7 @@ var package = require('josi/package');
 
 this.task = {
   name: 'help',
-  doc: "print this message",
+  doc: 'print this message',
   execute: function(opts, tasks) {
     sys.puts('josi ' + package.version + ' by ' + package.author);
     sys.puts('Usage:\tjosi task [opts]');
