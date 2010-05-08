@@ -16,7 +16,6 @@ this.task = {
     var cwd = process.cwd();
     var tests = fs.readdirSync('tests')
       .map(function(t) { return path.join(cwd, 'tests', utilities.stripExtension(t)); });
-    sys.puts(sys.inspect(tests));
     var runner = new Runner(tests);
     runner.run();
   }
