@@ -24,7 +24,7 @@ this.Server = function(dir, port, autoReload) {
 
     var resetCache = function() {
       deleteCache();
-      fs.mkdirSync(cacheDir, 511);
+      fs.mkdirSync(cacheDir, 0777);
     };
 
     var reloadApp = function() {

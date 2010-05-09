@@ -20,7 +20,7 @@ this.task = {
 }
 
 var createApp = function(appName) {
-  fs.mkdirSync(appName, 511);
+  fs.mkdirSync(appName, 0777);
   fs.writeFileSync(appName + '/app.js',
     [
       'this.init = function() {',
@@ -33,7 +33,7 @@ var createApp = function(appName) {
     ].join('\r\n')
   );
   createController(appName, 'home');
-  fs.mkdirSync(appName + '/views', 511);
+  fs.mkdirSync(appName + '/views', 0777);
   fs.writeFileSync(appName + '/views/master.html',
     [
       '<html>',
@@ -51,7 +51,7 @@ var createApp = function(appName) {
 var createController = function(appName, controllerName) {
   var controllersDir = appName + '/controllers';
   if (!utilities.fileOrDirectoryExists(controllersDir)) {
-    fs.mkdirSync(controllersDir, 511);
+    fs.mkdirSync(controllersDir, 0777);
   }
   fs.writeFileSync(appName + '/controllers/' + controllerName + '.js',
     [
@@ -70,11 +70,11 @@ var createController = function(appName, controllerName) {
 var createView = function(appName, controllerName, viewName) {
   var viewsDir = appName + '/views';
   if (!utilities.fileOrDirectoryExists(viewsDir)) {
-    fs.mkdirSync(viewsDir, 511);
+    fs.mkdirSync(viewsDir, 0777);
   }
   viewsDir = viewsDir + '/' + controllerName;
   if (!utilities.fileOrDirectoryExists(viewsDir)) {
-    fs.mkdirSync(viewsDir, 511);
+    fs.mkdirSync(viewsDir, 0777);
   }
   fs.writeFileSync(appName + '/views/' + controllerName + '/' + viewName + '.html',
     [
