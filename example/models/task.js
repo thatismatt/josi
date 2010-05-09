@@ -1,3 +1,8 @@
+var dirty = require('dirty/dirty');
+
+// filename is relative to cwd
+var dirtyStore = new dirty.Dirty('store.dirty');
+
 var Task = function(title) {
   this.due = new Date();
   this.title = title || 'New Task';
@@ -7,10 +12,23 @@ var Task = function(title) {
   };
 };
 
-Task.fromJSON = function(json) {
+fromJSON = function(json) {
   var task = new Task(json.title);
   task.due = json.due;
   task.complete = json.complete;
 };
 
 this.Task = Task;
+
+this.all = function() {
+  return dirtyStore.filter(function() { return true; });
+};
+
+this.get = function(taskId) {
+  return dirtyStore.get(taskId);
+};
+
+this.save = function(obj) {
+  obj.id = dirty.uuid();
+  dirtyStore.set(obj.id, obj);
+};

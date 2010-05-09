@@ -1,0 +1,18 @@
+<% for (var i in tasks) { %>
+  <% var task = tasks[i]; %>
+  <p>
+    <a href="/task/details/<%= task.id %>">
+      <%= task.title %>
+    </a>
+    <% if (task.completed) { %>
+      <small>done</small>
+    <% } %>
+  </p>
+<% } %>
+
+<h2>Create Task</h2>
+
+<form method="post" action="/task/create">
+  <input name="title">
+  <input type="submit">
+</form>
