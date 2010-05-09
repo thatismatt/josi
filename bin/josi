@@ -10,7 +10,9 @@ try {
   // if that isn't on the path then assume the script being run is
   // in the source, so add the directory of the script to the path.
   if(err.message == "Cannot find module 'josi/tasks'") {
-    require.paths.push(path.normalize(path.dirname(__filename) + '/..'));
+    require.paths.push(
+      path.join(
+        path.normalize(path.dirname(__filename) + '/..'), 'lib'));
     var tasks = require('josi/tasks');
   }
 }
