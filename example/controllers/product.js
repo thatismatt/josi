@@ -11,6 +11,7 @@ exports.index = function() {
   return view({ title: 'List of products', products: products });
 };
 
-exports.details = function(id) {
+exports.details = function() {
+  var id = this.route[2];
   return products[id];
 };

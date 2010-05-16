@@ -8,7 +8,8 @@ this.index = function() {
   return view({ title: 'Tasks', tasks: tasks.all() });
 };
 
-this.details = function(id) {
+this.details = function() {
+  var id = this.route[2];
   return view(tasks.get(id));
 };
 
