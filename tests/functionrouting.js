@@ -2,7 +2,6 @@ var assert = require('assert');
 
 var test = require('josi/test');
 var utilities = require('josi/utilities');
-var RouteResult = require('josi/results').RouteResult;
 var FunctionRouter = require('josi/routing').FunctionRouter;
 
 this.name = 'Function Router Tests';
@@ -28,6 +27,11 @@ this.tests = {
   'Result\'s action is correct': function() {
     var router = createRouter();
     var aResult = router.route('aroute');
+    assert.equal('route a', aResult.action.getName());
+  },
+  'Result\'s action is correct with multiple routes': function() {
+    var router = createRouter();
+    var aResult = router.route('aroute');
     var bResult = router.route('broute');
     assert.equal('route a', aResult.action.getName());
     assert.equal('route b', bResult.action.getName());
@@ -42,6 +46,11 @@ this.tests = {
     var router = createRouter();
     var result = router.route('notaroute');
     assert.ok(result instanceof RouteResult);
+  },
+  'When no matching route result is a MissingRouteResult': function() {
+    var router = createRouter();
+    var result = router.route('notaroute');
+    assert.ok(result instanceof MissingRouteResult);
   },
   'When no matching route result has no action': function() {
     var router = createRouter();

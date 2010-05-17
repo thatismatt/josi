@@ -12,6 +12,6 @@ exports.index = function() {
 };
 
 exports.details = function() {
-  var id = this.route[2];
+  var id = this.route[0];
   return products[id];
 };
