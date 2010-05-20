@@ -1,6 +1,6 @@
-var results = require('josi/results');
-var view = results.view;
-var redirect = results.redirect;
+var actionresults = require('josi/actionresults');
+var view = actionresults.view;
+var redirect = actionresults.redirect;
 
 var tasks = require('../models/task')
 

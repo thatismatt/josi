@@ -1,4 +1,4 @@
-var content = require('josi/results').content;
+var content = require('josi/actionresults').content;
 
 this.css = function() { return content('static/style.css'); };
 this.jquery = function() { return content('static/jquery-1.4.2.min.js'); };

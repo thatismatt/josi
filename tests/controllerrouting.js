@@ -1,7 +1,7 @@
 var assert = require('assert');
 
 var test = require('josi/test');
-var results = require('josi/results');
+var routeresults = require('josi/routeresults');
 var ControllerRouter = require('josi/routing').ControllerRouter;
 
 this.name = 'Controller Router Tests';
@@ -33,12 +33,12 @@ this.tests = {
   'Result is a RouteResult': function() {
     var router = createRouter();
     var result = router.route('/');
-    assert.ok(result instanceof results.RouteResult);
+    assert.ok(result instanceof routeresults.RouteResult);
   },
   'If no controller matched and no default then missing route': function() {
     var router = createRouter();
     var result = router.route('/');
-    assert.ok(result instanceof MissingRouteResult);
+    assert.ok(result instanceof routeresults.MissingRouteResult);
   },
   'If no controller matched and no default then correct error message': function() {
     var router = createRouter();
@@ -48,7 +48,7 @@ this.tests = {
   'If no action matched and no default then missing route': function() {
     var router = createRouter();
     var result = router.route('/');
-    assert.ok(result instanceof results.MissingRouteResult);
+    assert.ok(result instanceof routeresults.MissingRouteResult);
   },
   'If no controller matched fallback to default': function() {
     var router = createRouter(true);
@@ -63,7 +63,7 @@ this.tests = {
   'If factory doesn\'t return controller then missing route': function() {
     var router = createRouter();
     var result = router.route('/missing');
-    assert.ok(result instanceof MissingRouteResult);
+    assert.ok(result instanceof routeresults.MissingRouteResult);
   },
   'If factory doesn\'t return controller then correct error message': function() {
     var router = createRouter();
@@ -73,7 +73,7 @@ this.tests = {
   'If action missing from controller then missing route': function() {
     var router = createRouter();
     var result = router.route('/product/missing');
-    assert.ok(result instanceof MissingRouteResult);
+    assert.ok(result instanceof routeresults.MissingRouteResult);
   },
   'If action missing from controller then correct error message': function() {
     var router = createRouter();

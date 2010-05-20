@@ -1,4 +1,4 @@
-var view = require('josi/results').view;
+var view = require('josi/actionresults').view;
 
 var products = {
   '1': { name: 'Raspberry Jam', price: '$1.99' },
