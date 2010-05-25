@@ -14,6 +14,7 @@ this.details = function() {
 };
 
 this.create = function() {
-  tasks.save({ title: 'A Task' });
+  // todo: validate title
+  tasks.save({ title: this.query.title });
   return redirect('/task/');
 };
