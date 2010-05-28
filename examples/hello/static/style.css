@@ -1,0 +1,4 @@
+body      { font-family: Georgia; }
+div.main  { clear: left; }
+ul.nav    { padding: 0; }
+.nav li   { float: left; padding: 5px; list-style-type: none; }

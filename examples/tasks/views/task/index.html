@@ -1,0 +1,15 @@
+<p>There are <%= tasks.length %> tasks.</p>
+
+<% for (var i in tasks) { %>
+  <% var task = tasks[i]; %>
+  <p>
+    <a href="/task/details/<%= task.id %>">
+      <%= task.title %>
+    </a>
+    <% if (task.completed) { %>
+      <small>done</small>
+    <% } %>
+  </p>
+<% } %>
+
+<p><a href="/task/create">[new task]</a></p>

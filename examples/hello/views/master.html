@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <link rel="icon" href="/static/favicon" type="image/png">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/static/css" type="text/css" charset="utf-8"></link>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <ul class="nav">
+      <li><a href="/home/redir">A redirect</a></li>
+      <li><a href="/product">List of products</a></li>
+      <li><a href="/error">Throw an error</a></li>
+    </ul>
+    <div class="main">
+      <%= main %>
+    </div>
+    <script src="/static/jquery" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/myjs" type="text/javascript" charset="utf-8"></script>
+  </body>
+</html>
