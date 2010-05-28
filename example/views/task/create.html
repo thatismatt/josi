@@ -1,0 +1,27 @@
+<h2>New Task</h2>
+
+<form method="post" action="/task/create">
+  <div>
+    <label for="title">Title:</label><input id="title" name="title">
+  </div>
+  <div>
+    <label for="description">Description:</label><input id="description" name="description">
+  </div>
+  <div>
+    <input type="submit">
+  </div>
+</form>
+
+<!--
+<form method="post" action="/task/create">
+  <input name="title">
+  <input name="other">
+  <input type="submit">
+</form>
+
+<form method="post" action="/task/create" enctype="multipart/form-data">
+  <input name="title">
+  <input type="file" name="file">
+  <input type="submit">
+</form>
+-->

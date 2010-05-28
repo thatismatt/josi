@@ -1,3 +1,5 @@
+<p>There are <%= tasks.length %> tasks.</p>
+
 <% for (var i in tasks) { %>
   <% var task = tasks[i]; %>
   <p>
@@ -10,9 +12,4 @@
   </p>
 <% } %>
 
-<h2>Create Task</h2>
-
-<form method="get" action="/task/create">
-  <input name="title">
-  <input type="submit">
-</form>
+<p><a href="/task/create">[new task]</a></p>

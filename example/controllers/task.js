@@ -14,7 +14,10 @@ this.details = function() {
 };
 
 this.create = function() {
-  // todo: validate title
-  tasks.save({ title: this.query.title });
-  return redirect('/task/');
+  if (this.params.title) {
+    tasks.save({ title: this.params.title, description: this.params.description || 'No description.' });    
+    return redirect('/task/');
+  } else {
+    return view({ title: 'New Task' });
+  }
 };
