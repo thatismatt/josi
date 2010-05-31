@@ -21,3 +21,21 @@ this.create = function() {
     return view({ title: 'New Task' });
   }
 };
+
+this.done = function() {
+  if (this.params.id) {
+    tasks.update(this.params.id, { completed: true });
+    return { success: true };
+  } else {
+    return { success: false, error: 'Argument "id" missing.' };
+  }
+};
+
+this.undone = function() {
+  if (this.params.id) {
+    tasks.update(this.params.id, { completed: false });
+    return { success: true };
+  } else {
+    return { success: false, error: 'Argument "id" missing.' };
+  }
+};

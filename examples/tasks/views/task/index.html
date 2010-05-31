@@ -2,14 +2,10 @@
 
 <% for (var i in tasks) { %>
   <% var task = tasks[i]; %>
-  <p>
+  <p id="<%= task.id %>"<% if (task.completed) { %> class="done"<% } %>>
+    <input class="completed" type="checkbox"<% if (task.completed) { %> checked="checked"<% } %>>
     <a href="/task/details/<%= task.id %>">
       <%= task.title %>
     </a>
-    <% if (task.completed) { %>
-      <small>done</small>
-    <% } %>
   </p>
 <% } %>
-
-<p><a href="/task/create">[new task]</a></p>

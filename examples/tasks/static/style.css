@@ -1,6 +1,10 @@
-h1        { padding: 0; margin: 0; }
+h1        { padding: 0; margin: 10px; }
 body      { font-family: Georgia; }
-div.main  { clear: left; }
+div.main  { clear: left; margin: 10px; }
 ul.nav    { padding: 0; margin: 0; }
-.nav li   { float: left; padding: 5px; margin: 5px; list-style-type: none; background-color: #ccc; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+.nav li   { float: left; padding: 5px; margin: 5px 5px 20px 5px; list-style-type: none; background-color: #ccc; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
 label     { display: block; float: left; width: 100px; }
+form      { margin: 10px 0; }
+form div  { margin: 5px 0; }
+
+.done     { text-decoration: line-through; }
