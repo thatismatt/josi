@@ -39,8 +39,8 @@ this.tests = {
   'Result\'s route data is correct': function() {
     var router = createRouter();
     var result = router.route('aroute');
-    assert.ok(result.route.contains('a'));
-    assert.ok(result.route.contains('route'));
+    assert.ok(result.route.indexOf('a') != -1);
+    assert.ok(result.route.indexOf('route') != -1);
   },
   'When no matching route result is a RouteResult': function() {
     var router = createRouter();
