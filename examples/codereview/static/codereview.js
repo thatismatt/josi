@@ -1,6 +1,13 @@
 $('form').submit(function() {
   var msg = $('#msg');
-  $.get('/home/send?msg=' + msg.val());
+  $.ajax({
+    url: '/home/send',
+    type: 'POST',
+    data: { msg: msg.val() },
+    error: function() {
+      // todo: deal with an error
+    }
+  });
   msg.val('');
   return false;
 });

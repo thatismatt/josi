@@ -1,5 +1,3 @@
-var sys = require('sys');
-
 var actionresults = require('josi/actionresults');
 var view = actionresults.view;
 var async = actionresults.async;
@@ -26,6 +24,9 @@ this.send = function() {
 this.listen = function() {
   return async(function(req, res) {
     clients.push(res);
+    res.socket.onend = function() {
+      clients.splice(clients.indexOf(res), 1);
+    };
   });
 };
 
