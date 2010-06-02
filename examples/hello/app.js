@@ -3,4 +3,5 @@ this.init = function() {
     /^\/(?:(\w+)\/?)?(?:(\w+)\/?)?(?:(\w+)\/?)?$/,
     { controller: 'home', action: 'index' }
   );
+  this.router.addStatic('static');
 };
