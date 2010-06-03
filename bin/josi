@@ -28,12 +28,12 @@ var matchingTasks = task ? tasks.getAllMatching(task) : [];
 if (matchingTasks.length == 1) {
   var matchedTask = matchingTasks[0];
   if (!utilities.cwdContainsApp() && matchedTask.appOnly) {
-    sys.puts('ERROR: can only execute the task "' + matchedTask.name + '" in a directory containing a Josi app.');
+    sys.puts('ERROR: can only execute the task "' + matchedTask.name + '" in a directory containing a josi app.');
   } else {
     matchedTask.execute(opts, tasks.tasks);
   }
 } else if (matchingTasks.length > 1) {
-  sys.puts('"' + task + '" is not a Josi command, did you mean one of these?');
+  sys.puts('"' + task + '" is not a josi command, did you mean one of these?');
   matchingTasks.forEach(function(t) {
     sys.puts('\t' + t.name);
   });
