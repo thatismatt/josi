@@ -6,69 +6,7 @@
   
   <title>josi - not so sketchy</title>
   
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #E9EFE4;
-      font-family: "Georgia", "Helvetica", "Times New Roman", serif;
-      color: #676;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 {
-      font-size: 3.8em;
-      margin-bottom: 0;
-    }
-    h1 .small {
-      font-size: 0.4em;
-    }
-    h1 a {
-      text-decoration: none;
-    }
-    h2 {
-      font-size: 1.5em;
-    }
-    h3 {
-      text-align: center;
-    }
-    a {
-      color: #676;
-    }
-    pre {
-      background-image: url(grid.png);
-      padding: 0.4em;
-      font-family: "Consolas", "Monaco", "Courier New", monospaced;
-    }
-    pre .kwd1 {
-      color: #66a;
-    }
-    pre .kwd2 {
-      color: #6aa;
-    }
-    pre .str {
-      color: #966;
-    }
-    hr {
-      border: 0;    
-      width: 80%;
-      border-bottom: 1px solid #aaa;
-    }
-    .description {
-      margin: -0.7em 0 0 1em;
-      font-size: 1.2em;
-      font-style: italic;
-    }
-    .download {
-      float: right;
-    }
-    .footer {
-      font-size: 0.8em;
-      text-align: center;
-      padding-top: 3em;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" type="text/css">
   
 </head>
 
@@ -88,9 +26,8 @@
       </a>
     </div>
 
-    <h1>
-      <a href="http://github.com/thatismatt/josi">josi</a>
-      <span class="small">by <a href="http://github.com/thatismatt">thatismatt</a></span>
+    <h1 class="title">
+      <a href="http://github.com/thatismatt/josi"><img src="josi.png" alt="josi"></a>
     </h1>
 
     <div class="description">
@@ -106,16 +43,16 @@ $ cd temp
 $ josi run</pre>
     
     <p>A josi controller:</p>
-    <pre><span class="kwd2">var</span> results = require(<span class="str">'josi/results'</span>);
-<span class="kwd2">var</span> redirect = results.redirect;
-<span class="kwd2">var</span> view = results.view;
+    <pre class="prettyprint">var actionresults = require('josi/actionresults');
+var redirect = actionresults.redirect;
+var view = actionresults.view;
 
-<span class="kwd2">this</span>.index = <span class="kwd1">function</span>() {
-  <span class="kwd1">return</span> view({ title: <span class="str">'A Title'</span>, name: <span class="str">'Kate'</span> });
+this.index = function() {
+  return view({ title: 'A Title', name: 'Kate' });
 };
-<span class="kwd2">this</span>.redir = <span class="kwd1">function</span>() {
-  <span class="kwd1">return</span> redirect(<span class="str">'/product/details/1'</span>);
-}</pre>
+this.redir = function() {
+  return redirect('/product/details/1');
+};</pre>
 
     <h2>Download</h2>
     <p>
@@ -131,7 +68,10 @@ $ josi run</pre>
     </div>
   
   </div>
-
+  <script type="text/javascript" src="prettify.js"></script>
+  <script type="text/javascript">
+    prettyPrint();
+  </script>
   <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
