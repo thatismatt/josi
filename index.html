@@ -3,23 +3,21 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  
   <title>josi - not so sketchy</title>
-  
   <link rel="stylesheet" href="style.css" type="text/css">
-  
 </head>
 
 <body>
+  <a id="top">&nbsp;</a>
   <a href="http://github.com/thatismatt/josi">
-    <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
+    <img id="banner" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
   </a>
 
   <div id="container">
-    <h1 class="title">
+    <h1 id="title">
       <a href="http://github.com/thatismatt/josi"><img src="josi.png" alt="josi"></a>
     </h1>
-    <div class="description">
+    <div id="description">
       not so sketchy
     </div>
     
@@ -73,12 +71,12 @@ this.redir = function() {
     <h2>Influences</h2>
     <p>josi is heavily influenced by ASP.NET MVC, and to a lesser extent by Ruby on Rails and Django.</p>
   </div>  
-  <div class="footer">
+  <div id="footer">
     Get the source code on GitHub : <a href="http://github.com/thatismatt/josi">thatismatt/josi</a>
   </div>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script type="text/javascript">
-    var $contents = $('<div class="contents"><h3>Contents</h3><ul/></div>')
+    var $contents = $('<div id="contents"><h3>Contents</h3><ul/></div>')
       .insertBefore('h2:first')
       .find('ul');
     $('#container h2').each(function() {
@@ -87,6 +85,15 @@ this.redir = function() {
       var id = text.replace(' ', '-').toLowerCase();
       $h2.attr('id', id);
       $contents.append('<li><a href="#' + id + '">' + text + '</a></li>')
+    });
+    
+    $('<a class="top" href="#top">&uarr;</span>').appendTo('h2');
+    
+    $('#contents a, .top').click(function() {
+      $('html, body').animate({
+        scrollTop: $($(this).attr('href')).offset().top
+      }, 250, 'linear');
+      return false;
     });
   </script>
   <script type="text/javascript" src="prettify.js"></script>
