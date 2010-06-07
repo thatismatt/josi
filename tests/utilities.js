@@ -40,6 +40,20 @@ this.tests = {
     var processed = utilities.processARGV(['', '', 'atask', 'arg']);
     assert.equal(processed.args[0], 'arg');
   },
+  'Opt keys are case insensitive': function() {
+    var processed = utilities.processARGV(['', '', 'atask', 'CaMel=b', 'c=HumPs', 'third=alongerthing']);
+    assert.equal(processed.opts.camel, 'b');
+    assert.equal(processed.opts.c, 'HumPs');
+    assert.equal(processed.opts.third, 'alongerthing');
+  },
+  'Opt values are case sensitive': function() {
+    var processed = utilities.processARGV(['', '', 'atask', 'CaMel=b']);
+    assert.equal(processed.opts.camel, 'b');
+  },
+  'Args are case sensitive': function() {
+    var processed = utilities.processARGV(['', '', 'atask', 'HumPs']);
+    assert.equal(processed.args[0], 'HumPs');
+  },
   'Multiple opts work': function() {
     var processed = utilities.processARGV(['', '', 'atask', 'a=b', 'c=100', 'third=alongerthing']);
     assert.equal(processed.opts.a, 'b');
