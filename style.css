@@ -23,7 +23,7 @@ a img {
 pre {
   background-image: url(grid.png);
   padding: 0.4em;
-  font-family: "Consolas", "Monaco", "Courier New", monospaced;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
 }
 pre .kwd {
   color: #66a;
@@ -33,11 +33,6 @@ pre .pln {
 }
 pre .str {
   color: #966;
-}
-hr {
-  border: 0;    
-  width: 80%;
-  border-bottom: 1px solid #aaa;
 }
 .description {
   margin: -3em 0 0 4em;
