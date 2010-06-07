@@ -1,3 +1,5 @@
+var templating = require('josi/templating');
+
 this.init = function() {
   this.router.add(
     /^\/(?:(\w+)\/?)?(?:(\w+)\/?)?(?:([0-9]+)\/?)?$/,
@@ -5,3 +7,5 @@ this.init = function() {
   );
   this.router.addStatic('static');
 };
+
+this.templater = new templating.jQueryTemplatingEngine();
