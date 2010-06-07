@@ -5,7 +5,7 @@ $('form').submit(function() {
     type: 'POST',
     data: { msg: msg.val() },
     error: function() {
-      // todo: deal with an error
+      // todo: deal with error sending message
     }
   });
   msg.val('');

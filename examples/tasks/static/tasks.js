@@ -7,7 +7,7 @@ $('.completed').change(function() {
     },
     type: 'POST',
     error: function() {
-      // todo: deal with errors
+      // todo: deal with error when changing state of task
     },
     success: function() {
       if ($this.attr('checked')) {
