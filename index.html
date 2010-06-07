@@ -76,6 +76,19 @@ this.redir = function() {
   <div class="footer">
     Get the source code on GitHub : <a href="http://github.com/thatismatt/josi">thatismatt/josi</a>
   </div>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript">
+    var $contents = $('<div class="contents"><h3>Contents</h3><ul/></div>')
+      .insertBefore('h2:first')
+      .find('ul');
+    $('#container h2').each(function() {
+      var $h2 = $(this);
+      var text = $h2.text();
+      var id = text.replace(' ', '-').toLowerCase();
+      $h2.attr('id', id);
+      $contents.append('<li><a href="#' + id + '">' + text + '</a></li>')
+    });
+  </script>
   <script type="text/javascript" src="prettify.js"></script>
   <script type="text/javascript">
     prettyPrint();
