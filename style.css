@@ -1,7 +1,7 @@
 body {
   margin-top: 1.0em;
-  background-color: #E9EFE4;
   font-family: "Georgia", "Helvetica", "Times New Roman", serif;
+  background-color: #E9EFE4;
   color: #676;
   margin: 0;
 }
@@ -61,6 +61,10 @@ pre .str {
   padding-left: 0.3em;
   position: absolute;
   top: 0;
+  color: #E9EFE4;
+}
+h2:hover .top {
+  color: #676;
 }
 #banner {
   position: absolute;
