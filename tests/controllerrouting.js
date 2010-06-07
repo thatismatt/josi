@@ -10,7 +10,7 @@ var createRouter = function(setRouterDefaults) {
   var factory = {
     getController: function(controllerName) {
       if (controllerName == 'missing') {
-        return;
+        throw new Error('Missing Controller');
       } else {
         return {
           index: test.createMockFunction(controllerName + ' controller, index action')
@@ -25,7 +25,6 @@ var createRouter = function(setRouterDefaults) {
       { controller: 'home', action: 'index' } :
       {}
   );
-  // router.add(/^broute$/, test.createMockFunction('route b'));
   return router;
 };
 
