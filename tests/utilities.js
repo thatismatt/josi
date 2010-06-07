@@ -39,5 +39,17 @@ this.tests = {
   'If not key value pair then it is an arg': function() {
     var processed = utilities.processARGV(['', '', 'atask', 'arg']);
     assert.equal(processed.args[0], 'arg');
+  },
+  'Multiple opts work': function() {
+    var processed = utilities.processARGV(['', '', 'atask', 'a=b', 'c=100', 'third=alongerthing']);
+    assert.equal(processed.opts.a, 'b');
+    assert.equal(processed.opts.c, '100');
+    assert.equal(processed.opts.third, 'alongerthing');
+  },
+  'Multiple args work': function() {
+    var processed = utilities.processARGV(['', '', 'atask', 'arg1', 'arg2', 'arg3']);
+    assert.equal(processed.args[0], 'arg1');
+    assert.equal(processed.args[1], 'arg2');
+    assert.equal(processed.args[2], 'arg3');
   }
 };
