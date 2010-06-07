@@ -29,7 +29,7 @@ var matchingTasks = task ? tasks.getAllMatching(task) : [];
 if (matchingTasks.length == 1) {
   var matchedTask = matchingTasks[0];
   if (!utilities.cwdContainsApp() && matchedTask.appOnly) {
-    sys.puts('ERROR: can only execute the task "' + matchedTask.name + '" in a directory containing a josi app.');
+    sys.puts('ERROR: The task "' + matchedTask.name + '" can only be executed in a directory containing a josi app.');
   } else {
     matchedTask.execute(opts, args, tasks.tasks);
   }
