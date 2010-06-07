@@ -22,7 +22,8 @@ var utilities = require('josi/utilities');
 var processedArgs = utilities.processARGV(process.argv);
 
 var task = processedArgs.task;
-var opts = processedArgs.opts || {};
+var opts = processedArgs.opts;
+var args = processedArgs.args;
 
 var matchingTasks = task ? tasks.getAllMatching(task) : [];
 if (matchingTasks.length == 1) {
@@ -30,7 +31,7 @@ if (matchingTasks.length == 1) {
   if (!utilities.cwdContainsApp() && matchedTask.appOnly) {
     sys.puts('ERROR: can only execute the task "' + matchedTask.name + '" in a directory containing a josi app.');
   } else {
-    matchedTask.execute(opts, tasks.tasks);
+    matchedTask.execute(opts, args, tasks.tasks);
   }
 } else if (matchingTasks.length > 1) {
   sys.puts('"' + task + '" is not a josi command, did you mean one of these?');
@@ -40,8 +41,8 @@ if (matchingTasks.length == 1) {
 } else {
   if (task) {
     opts.name = task;
-    tasks.getFirstMatching('create').execute(opts, tasks.tasks);
+    tasks.getFirstMatching('create').execute(opts, args, tasks.tasks);
   } else {
-    tasks.getFirstMatching('help').execute(opts, tasks.tasks);    
+    tasks.getFirstMatching('help').execute(opts, args, tasks.tasks);    
   }
 }
