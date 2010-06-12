@@ -1,0 +1,6 @@
+<ul>
+  <% tasks.forEach(function(t, id) { %> 
+    <li><a href="/task/details/<%= id %>"><%= t.title %></a></li>
+  <% }); %>
+</ul>
+<p><a href="/task/create/">Create a new task</a></p>
