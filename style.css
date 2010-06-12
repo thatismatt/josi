@@ -28,10 +28,14 @@ a:active, a:focus {
 a img {
   border-width: 0;
 }
+pre, code {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 80%;
+}
 pre {
   background-image: url(grid.png);
-  padding: 0.4em;
-  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  padding: 0.4em 0.6em;
+  overflow-x: auto;
 }
 pre .kwd {
   color: #66a;
@@ -41,6 +45,15 @@ pre .pln {
 }
 pre .str {
   color: #966;
+}
+pre .tag {
+  color: #966;
+}
+pre .com {
+  color: #695;
+}
+pre .atn, pre .atv {
+  color: #b88;
 }
 #description {
   margin: -3em 0 0 4em;

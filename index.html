@@ -15,7 +15,7 @@
   
   <div id="container">
     <h1 id="title">
-      <a href="http://github.com/thatismatt/josi"><img src="josi.png" alt="josi"></a>
+      <a href="http://github.com/thatismatt/josi/"><img src="josi.png" alt="josi"></a>
     </h1>
     <div id="description">
       not so sketchy
@@ -25,21 +25,28 @@
     
     <h2>Getting started</h2>
     <p>Create a josi app and start the dev server:</p>
-    <pre>$ josi temp
-$ cd temp
+    <pre>$ josi hello
+$ cd hello
 $ josi run</pre>
     
     <p>A josi controller:</p>
     <pre class="prettyprint">var actionresults = require('josi/actionresults');
-var redirect = actionresults.redirect;
 var view = actionresults.view;
+var redirect = actionresults.redirect;
 
 this.index = function() {
-  return view({ title: 'A Title', name: 'Kate' });
+  return view({ title: 'A Title', name: 'josi' });
 };
+
 this.redir = function() {
   return redirect('/product/details/1');
 };</pre>
+    <p>A josi view:</p>
+    <pre class="prettyprint">&lt;h1&gt;&lt;%= title %&gt;&lt;/h1&gt;
+&lt;p&gt;Hello &lt;%= name %&gt;&lt;/p&gt;</pre>
+    
+    <h2>Tutorial</h2>
+    <p>There is a tutorial <a href="http://thatismatt.github.com/josi/tutorial.html">here</a>.</p>
     
     <h2>Download</h2>
     <p>
@@ -72,7 +79,7 @@ this.redir = function() {
     <p>josi is heavily influenced by ASP.NET MVC, and to a lesser extent by Ruby on Rails and Django.</p>
   </div>
   <div id="footer">
-    Get the source code on GitHub : <a href="http://github.com/thatismatt/josi">thatismatt/josi</a>
+    Get the source code on GitHub : <a href="http://github.com/thatismatt/josi/">thatismatt/josi</a>
   </div>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script src="jquery.color.js" type="text/javascript"></script>
