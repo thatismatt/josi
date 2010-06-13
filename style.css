@@ -29,7 +29,7 @@ a img {
   border-width: 0;
 }
 pre, code {
-  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Nimbus Mono L", "Courier New", monospace;
   font-size: 80%;
 }
 pre {
