@@ -52,5 +52,10 @@ this.tests = {
     var template = compileTemplate('<% var doubleIt = function(it) { return it + it; }; %><%= doubleIt(c) %>');
     var rendered = template({ c: 'd' });
     assert.equal(rendered, 'dd');
+  },
+  'MicroTemplatingEngine escape HTML': function() {
+    var template = compileTemplate('a <%: d %> b <%: e %> c');
+    var rendered = template({ d: '<div>', e: 'this & that' });
+    assert.equal(rendered, 'a &lt;div&gt; b this &amp; that c');
   }
 };
