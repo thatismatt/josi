@@ -65,5 +65,20 @@ this.tests = {
     assert.equal(processed.args[0], 'arg1');
     assert.equal(processed.args[1], 'arg2');
     assert.equal(processed.args[2], 'arg3');
+  },
+  'Merge doesn\'t touch arguments': function() {
+    var a = { a: 1 };
+    var b = { a: 2 };
+    var result = utilities.merge(a, b);
+    assert.equal(a.a, 1);
+    assert.equal(Object.keys(a).length, 1);
+    assert.equal(b.a, 2);
+    assert.equal(Object.keys(b).length, 1);
+  },
+  'Merge obeys ordering or arguments': function() {
+    var a = { a: 1 };
+    var b = { a: 2 };
+    var result = utilities.merge(a, b);
+    assert.equal(result.a, 2);
   }
 };
