@@ -19,4 +19,4 @@ var poll = function() {
     poll();
   });
 };
-poll();
+setTimeout(function(){poll();},1);//chromium/chrome fix : setTimeout to end the loading state
