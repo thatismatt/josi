@@ -19,4 +19,6 @@ var poll = function() {
     poll();
   });
 };
-setTimeout(function(){poll();},1);//chromium/chrome fix : setTimeout to end the loading state
+
+setTimeout(poll, 1); // chrome fix: end loading state
+
